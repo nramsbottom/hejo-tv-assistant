@@ -1,0 +1,14 @@
+{
+    "name": "hejo.tv Assistant",
+    "action": {},
+    "manifest_version": 3,
+    "version": "0.1",
+    "description": "Fixes issues with the website hejo.tv that cause it to perform poorly.",
+    "permissions": [
+      "activeTab",
+      "scripting"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    }
+  }
