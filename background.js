@@ -1,16 +1,18 @@
-function removeInviteLink() {
-    
-    // find the invite a friend element and delete it
-    var elements = document.getElementsByClassName("text-invinite");
-    while (elements.length > 0){
-        elements[0].parentNode.removeChild(elements[0]);
-    }
 
-  }
-  
-  chrome.action.onClicked.addListener((tab) => {
+// when a new tab is opened
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.status === 'complete' && /^http/.test(tab.url)) {
     chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: removeInviteLink
+      target: { tabId: tabId },
+      files: ["./foreground.js"]
     });
+  }
+});
+
+// if you click the button (should never be necessary)
+chrome.action.onClicked.addListener((tab) => {
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: ["./foreground.js"]
   });
+});
